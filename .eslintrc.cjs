@@ -1,29 +1,40 @@
-// .eslintrc.cjs
 module.exports = {
-  root: true,
-  globals: {
-    defineProps: 'readonly',
-    defineExpose: 'readonly',
-    defineEmits: 'readonly',
-    withDefaults: 'readonly'
+  env: {
+    browser: true,
+    es2021: true,
+    node: true
   },
   extends: [
-    'plugin:@typescript-eslint/recommended',
+    'eslint:recommended',
+    'plugin:vue/vue3-essential',
     'plugin:vue/vue3-recommended',
-    'airbnb-base'
+    'plugin:prettier/recommended'
   ],
+  overrides: [
+    {
+      env: {
+        node: true
+      },
+      files: ['.eslintrc.{js,cjs}'],
+      parserOptions: {
+        sourceType: 'script'
+      }
+    }
+  ],
+  // 参考vue官方推荐,替换默认parser
+  parser: 'vue-eslint-parser',
   parserOptions: {
-    // parser: '@typescript-eslint/parser',
-    // ecmaVersion: 'latest'
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+    ecmaFeatures: {
+      jsx: true
+    }
   },
+  plugins: ['vue'],
   rules: {
-    // 关闭函数名后面必须有空格的验证
-    'space-before-function-paren': 0,
-    // 关闭强制不变的变量使用 const, 因为自动格式化 有时候会把 let 变成 const
-    'perfer-const': 0,
-    // 允许行尾分号
-    semi: 0,
-    // 允许尾后逗号
-    'comma-dangle': 0
+    indent: ['error', 2],
+    'linebreak-style': ['error', 'unix'],
+    quotes: ['error', 'single'],
+    semi: ['error', 'never']
   }
 }

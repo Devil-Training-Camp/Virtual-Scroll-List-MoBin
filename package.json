@@ -6,21 +6,42 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint:script": "eslint --ext .vue,.js,.jsx,.ts,.tsx --fix --quiet ./",
+    "lint:style": "stylelint --fix \"src/**/*.{css,scss}\"",
+    "lint": "pnpm run lint:script && pnpm run lint:style",
+    "prepare": "husky install"
   },
   "dependencies": {
     "vue": "^3.2.47"
   },
   "devDependencies": {
+    "@commitlint/cli": "^17.6.5",
+    "@commitlint/config-conventional": "^17.6.5",
     "@faker-js/faker": "^8.0.2",
     "@vitejs/plugin-vue": "^4.1.0",
-    "eslint": "^8.42.0",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-import-resolver-alias": "^1.1.2",
-    "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-vue": "^9.14.1",
+    "eslint": "^8.43.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-vue": "^9.15.0",
+    "husky": "^8.0.0",
+    "lint-staged": "^13.2.2",
+    "prettier": "^2.8.8",
     "sass": "^1.62.1",
-    "vite": "^4.3.9",
-    "vue-eslint-parser": "^9.3.0"
+    "stylelint": "^15.8.0",
+    "stylelint-config-prettier": "^9.0.5",
+    "stylelint-config-recess-order": "^4.2.0",
+    "stylelint-config-standard": "^33.0.0",
+    "stylelint-config-standard-scss": "^9.0.0",
+    "stylelint-prettier": "^3.0.0",
+    "vite": "^4.3.9"
+  },
+  "lint-staged": {
+    "src/**/*.{vue,js,jsx,ts,tsx}": [
+      "npm run lint:script"
+    ],
+    "src/**/*.{css,scss}": [
+      "npm run lint:style"
+    ]
   }
 }
